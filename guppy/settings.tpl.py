@@ -88,21 +88,30 @@ DATABASES = {
     }
 }
 
+LOCALE_PATHS = (
+     BASE_DIR + '/locale', )
+
 # =================================\
 # ldap configuration
 
 # LDAP_SERVER = 'ldap://host_ldap:port'
+LDAP_SERVER = 'ldap://ldap.intranet:389'
 
 #LDAP_DN = 'dc=domain,dc=edu,dc=ar'
+LDAP_DN = 'dc=rectorado,dc=unl,dc=edu,dc=ar'
 
 # Organizational Unit for Person
-#LDAP_PEOPLE = 'People'
-
+LDAP_PEOPLE = 'People'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
 LANGUAGE_CODE = 'es'
+
+LANGUAGES = (
+  ('es', _('Spanish')),
+  ('en', _('English')),
+)
 
 TIME_ZONE = 'UTC'
 

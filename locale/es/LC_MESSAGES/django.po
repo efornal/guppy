@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-13 12:42-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/models.py:11 app/models.py:34 app/models.py:58
+msgid "name"
+msgstr "Nombre"
+
+#: app/models.py:13 app/models.py:36 app/models.py:60
+msgid "description"
+msgstr "Descripción"
+
+#: app/models.py:15 app/models.py:38 app/models.py:62 app/models.py:80
+#: app/models.py:101
+msgid "created_at"
+msgstr "Creado"
+
+#: app/models.py:17 app/models.py:40 app/models.py:64 app/models.py:82
+#: app/models.py:103
+msgid "updated_at"
+msgstr "Modificado"
+
+#: app/models.py:22
+msgid "Integration"
+msgstr "Integración"
+
+#: app/models.py:23
+msgid "Integrations"
+msgstr "Integraciones"
+
+#: app/models.py:43
+msgid "integration"
+msgstr "Integración"
+
+#: app/models.py:47
+msgid "Project"
+msgstr "Proyecto"
+
+#: app/models.py:48
+msgid "Projects"
+msgstr "Proyectos"
+
+#: app/models.py:66 app/models.py:84
+msgid "project"
+msgstr "Proyecto"
+
+#: app/models.py:70
+msgid "Change"
+msgstr "Cambio"
+
+#: app/models.py:71
+msgid "Changes"
+msgstr "Cambios"
+
+#: app/models.py:78 app/models.py:99
+msgid "confirms_change"
+msgstr "Confirma el cambio"
+
+#: app/models.py:86 app/models.py:107
+msgid "user"
+msgstr "Usuario"
+
+#: app/models.py:90
+msgid "Responsable"
+msgstr "Responsable"
+
+#: app/models.py:91
+msgid "responsible"
+msgstr "Responsable"
+
+#: app/models.py:105
+msgid "change"
+msgstr "Cambio"
+
+#: app/models.py:113 app/models.py:114
+msgid "Generated"
+msgstr "Cambios generados"
+
+#: guppy/settings.py:110 guppy/settings.tpl.py:112
+msgid "Spanish"
+msgstr "Español"
+
+#: guppy/settings.py:111 guppy/settings.tpl.py:113
+msgid "English"
+msgstr "Inglés"

@@ -4,7 +4,9 @@ from app.models import Integration
 from app.models import Change
 from app.models import Responsable
 from app.models import Generated
+from django.conf.locale.es import formats as es_formats
 
+es_formats.DATETIME_FORMAT = "d-m-Y H:i"
 
 
 class GeneratedAdmin(admin.ModelAdmin):
