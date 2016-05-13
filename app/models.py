@@ -73,7 +73,6 @@ class Change(models.Model):
     def __unicode__(self):
         return "%s" % (self.name)
 
-
 class Responsable(models.Model):
     confirms_change = models.BooleanField(default=False,
                                           verbose_name=_('confirms_change'))
@@ -106,6 +105,8 @@ class Generated(models.Model):
                                     verbose_name=_('change'))
     user = models.ForeignKey(User, null=False, default=None,
                                     verbose_name=_('user'))
+    def project_name(obj):
+        return "%s" % obj.change.project.name
 
     class Meta:
         db_table = 'generated'
