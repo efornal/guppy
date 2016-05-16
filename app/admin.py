@@ -22,7 +22,7 @@ class ProjectAdmin(admin.ModelAdmin):
     ordering = ('name',)
     
 class ResponsableAdmin(admin.ModelAdmin):
-    list_display = ('project', 'user',
+    list_display = ('user', 'project',
                     'updated_at', 'created_at', 'validated_structure')
     search_fields = ['project']
     ordering = ('project',)
