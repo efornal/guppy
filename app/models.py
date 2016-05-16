@@ -93,7 +93,7 @@ class Responsable(models.Model):
         verbose_name_plural = _('responsible')
 
     def __unicode__(self):
-        return "%s" % (self.confirms_change)
+        return "%s" % (self.validated_structure)
 
 
 class Generated(models.Model):
