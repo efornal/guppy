@@ -4,6 +4,7 @@ from app.models import Integration
 from app.models import Change
 from app.models import Responsable
 from app.models import Generated
+from app.models import Integrate
 from django.conf.locale.es import formats as es_formats
 import logging
 
@@ -20,13 +21,30 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'integration_name', 'updated_at', 'created_at',)
     search_fields = ['name']
     ordering = ('name',)
+
+class IntegrateInline(admin.TabularInline):
+   model = Integration.projects.through
+#   fk_name = "project"
+#   fk_name = "integration"
+#   fields = ['integrate__project', 'integrate__integration']
+   extra = 3
+     
+class IntegrationAdmin(admin.ModelAdmin):
+    #list_display = ('integration', 'project',)
+    # search_fields = ['integration']
+    # ordering = ('integration',)
+    inlines = [IntegrateInline,]
+
+class IntegrateAdmin(admin.ModelAdmin):
+    list_display = ('integration', 'project',)
+
     
 class ResponsableAdmin(admin.ModelAdmin):
     list_display = ('user', 'project',
                     'updated_at', 'created_at', 'validated_structure')
     search_fields = ['project']
     ordering = ('project',)
-    
+
 class ChangeAdmin(admin.ModelAdmin):
     list_display = ('project', 'name',
                     'updated_at', 'created_at')
@@ -42,7 +60,8 @@ class ChangeAdmin(admin.ModelAdmin):
             g.save()
 
             
-admin.site.register(Integration)
+admin.site.register(Integration, IntegrationAdmin)
+admin.site.register(Integrate,IntegrateAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Change, ChangeAdmin)
 admin.site.register(Responsable, ResponsableAdmin)
