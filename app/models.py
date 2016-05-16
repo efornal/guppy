@@ -74,8 +74,8 @@ class Change(models.Model):
         return "%s" % (self.name)
 
 class Responsable(models.Model):
-    confirms_change = models.BooleanField(default=False,
-                                          verbose_name=_('confirms_change'))
+    validated_structure = models.BooleanField(default=False,
+                                              verbose_name=_('validated_structure'))
     created_at = models.DateTimeField( auto_now_add=True,
                                        verbose_name=_('created_at'))
     updated_at = models.DateTimeField( auto_now=True,
@@ -95,8 +95,8 @@ class Responsable(models.Model):
 
 
 class Generated(models.Model):
-    confirms_change = models.BooleanField(default=False,
-                                          verbose_name=_('confirms_change'))
+    change_confirmed = models.BooleanField(default=False,
+                                          verbose_name=_('change_confirmed'))
     created_at = models.DateTimeField( auto_now_add=True,
                                        verbose_name=_('created_at'))
     updated_at = models.DateTimeField( auto_now=True,

@@ -12,7 +12,7 @@ es_formats.DATETIME_FORMAT = "d-m-Y H:i"
 
 class GeneratedAdmin(admin.ModelAdmin):
     list_display = ('user', 'project_name', 'change',
-                    'updated_at', 'created_at', 'confirms_change')
+                    'updated_at', 'created_at', 'change_confirmed')
     search_fields = ['change']
     ordering = ('user',)
 
