@@ -5,6 +5,7 @@ from app.models import Change
 from app.models import Responsable
 from app.models import Generated
 from django.conf.locale.es import formats as es_formats
+import logging
 
 es_formats.DATETIME_FORMAT = "d-m-Y H:i"
 
@@ -22,7 +23,15 @@ class ChangeAdmin(admin.ModelAdmin):
     search_fields = ['name']
     ordering = ('project',)
 
-    
+    def save_model(self, request, obj, form, change):
+        project = Project.objects.get(pk=obj.pk)
+        projects = project.integration.project_set.all()
+        for p in projects:
+            responsable = p.responsable_set.all().first()
+            g = Generated(change=obj,user=responsable.user)
+            g.save()
+
+            
 admin.site.register(Integration)
 admin.site.register(Project)
 admin.site.register(Change, ChangeAdmin)

@@ -90,7 +90,7 @@ msgstr "Cambio"
 
 #: app/models.py:113 app/models.py:114
 msgid "Generated"
-msgstr "Cambios generados"
+msgstr "Cambios pendientes"
 
 #: guppy/settings.py:110 guppy/settings.tpl.py:112
 msgid "Spanish"
