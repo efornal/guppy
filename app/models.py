@@ -50,6 +50,8 @@ class Project(models.Model):
     def __unicode__(self):
         return "%s" % (self.name)
     
+    def integration_name(obj):
+        return "%s" % obj.integration.name
 
 
 class Change(models.Model):

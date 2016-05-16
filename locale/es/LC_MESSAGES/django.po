@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-13 12:42-0300\n"
+"POT-Creation-Date: 2016-05-16 11:23-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,21 +18,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/models.py:11 app/models.py:34 app/models.py:58
+#: app/models.py:11 app/models.py:34 app/models.py:60
 msgid "name"
 msgstr "Nombre"
 
-#: app/models.py:13 app/models.py:36 app/models.py:60
+#: app/models.py:13 app/models.py:36 app/models.py:62
 msgid "description"
 msgstr "Descripción"
 
-#: app/models.py:15 app/models.py:38 app/models.py:62 app/models.py:80
-#: app/models.py:101
+#: app/models.py:15 app/models.py:38 app/models.py:64 app/models.py:82
+#: app/models.py:103
 msgid "created_at"
 msgstr "Creado"
 
-#: app/models.py:17 app/models.py:40 app/models.py:64 app/models.py:82
-#: app/models.py:103
+#: app/models.py:17 app/models.py:40 app/models.py:66 app/models.py:84
+#: app/models.py:105
 msgid "updated_at"
 msgstr "Modificado"
 
@@ -56,46 +56,53 @@ msgstr "Proyecto"
 msgid "Projects"
 msgstr "Proyectos"
 
-#: app/models.py:66 app/models.py:84
+#: app/models.py:68 app/models.py:86
 msgid "project"
 msgstr "Proyecto"
 
-#: app/models.py:70
+#: app/models.py:72
 msgid "Change"
 msgstr "Cambio"
 
-#: app/models.py:71
+#: app/models.py:73
 msgid "Changes"
 msgstr "Cambios"
 
-#: app/models.py:78 app/models.py:99
-msgid "confirms_change"
-msgstr "Confirma el cambio"
+#: app/models.py:80
+msgid "validated_structure"
+msgstr "estructura validada"
 
-#: app/models.py:86 app/models.py:107
+#: app/models.py:88 app/models.py:109
 msgid "user"
 msgstr "Usuario"
 
-#: app/models.py:90
+#: app/models.py:92
 msgid "Responsable"
 msgstr "Responsable"
 
-#: app/models.py:91
+#: app/models.py:93
 msgid "responsible"
 msgstr "Responsable"
 
-#: app/models.py:105
+#: app/models.py:101
+msgid "change_confirmed"
+msgstr "Cambio confirmado"
+
+#: app/models.py:107
 msgid "change"
 msgstr "Cambio"
 
-#: app/models.py:113 app/models.py:114
+#: app/models.py:115 app/models.py:116
 msgid "Generated"
 msgstr "Cambios pendientes"
 
-#: guppy/settings.py:110 guppy/settings.tpl.py:112
+#: guppy/settings.py:111 guppy/settings.tpl.py:112
 msgid "Spanish"
 msgstr "Español"
 
-#: guppy/settings.py:111 guppy/settings.tpl.py:113
+#: guppy/settings.py:112 guppy/settings.tpl.py:113
 msgid "English"
 msgstr "Inglés"
+
+#~ msgid "confirms_change"
+#~ msgstr "Confirma el cambio"

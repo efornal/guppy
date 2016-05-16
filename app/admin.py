@@ -16,6 +16,16 @@ class GeneratedAdmin(admin.ModelAdmin):
     search_fields = ['change']
     ordering = ('user',)
 
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ('name', 'integration_name', 'updated_at', 'created_at',)
+    search_fields = ['name']
+    ordering = ('name',)
+    
+class ResponsableAdmin(admin.ModelAdmin):
+    list_display = ('project', 'user',
+                    'updated_at', 'created_at', 'validated_structure')
+    search_fields = ['project']
+    ordering = ('project',)
     
 class ChangeAdmin(admin.ModelAdmin):
     list_display = ('project', 'name',
@@ -33,7 +43,7 @@ class ChangeAdmin(admin.ModelAdmin):
 
             
 admin.site.register(Integration)
-admin.site.register(Project)
+admin.site.register(Project, ProjectAdmin)
 admin.site.register(Change, ChangeAdmin)
-admin.site.register(Responsable)
+admin.site.register(Responsable, ResponsableAdmin)
 admin.site.register(Generated, GeneratedAdmin)
