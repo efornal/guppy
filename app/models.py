@@ -113,7 +113,7 @@ class Generated(models.Model):
         verbose_name_plural = _('Generated')
 
     def __unicode__(self):
-        return "%s" % (self.confirms_change)
+        return "%s" % (self.change_confirmed)
 
 
 class Integrate(models.Model):
