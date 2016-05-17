@@ -12,9 +12,10 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from django.utils.translation import ugettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+BASE_URL = 'http://domain.com/guppy'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -28,6 +29,17 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 TEMPLATE_DEBUG = True
 
+# =================================\
+# email configuration server
+EMAIL_HOST='smtp.server'
+EMAIL_PORT=25
+#EMAIL_HOST_PASSWORD=''
+#EMAIL_HOST_USER=''
+
+# email configuration application
+EMAIL_FROM = 'noreply@domain.com'
+# =================================/
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -38,6 +50,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'app',
 )
 
@@ -93,16 +106,14 @@ LOCALE_PATHS = (
 
 # =================================\
 # ldap configuration
+LDAP_SERVER = 'ldap://host_ldap:port'
 
-# LDAP_SERVER = 'ldap://host_ldap:port'
-LDAP_SERVER = 'ldap://ldap.intranet:389'
-
-#LDAP_DN = 'dc=domain,dc=edu,dc=ar'
-LDAP_DN = 'dc=rectorado,dc=unl,dc=edu,dc=ar'
+LDAP_DN = 'dc=domain,dc=edu,dc=ar'
 
 # Organizational Unit for Person
 LDAP_PEOPLE = 'People'
-
+# =================================/
+    
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
