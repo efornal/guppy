@@ -12,6 +12,7 @@ from django.core.mail import send_mass_mail
 import logging
 from django.conf import settings
 from django.contrib import messages
+from django.utils.translation import ugettext as _
 
 es_formats.DATETIME_FORMAT = "d-m-Y H:i"
 
@@ -66,18 +67,20 @@ class ChangeAdmin(admin.ModelAdmin):
             responsible = User.objects.filter(responsable__project__integrate__integration_id=i.id)
             responsible_users = list(set(responsible_users) | set(responsible)) 
 
-        logging.error("Responsables encontrados: %s" % responsible_users)
+        logging.info("Found responsible: %s" % responsible_users)
         emails=[]
         messages_to_responsible = ()
         link_to_change = "%s%s%s" % (settings.BASE_URL, '/admin/app/change/', obj.pk)
-        message_subject = "Actualizacion de '%s'" % obj.project.name
-        message_from='noreply@rectorado.unl.edu.ar'
-        message_content = "Proyecto actualizado: %s\n\n" % obj.project.name
-        message_content += "Cambio: %s\n\n" % obj.name
-        message_content += "Descripcion: \n%s\n\n" % obj.description
-        message_content += "Creado: %s\n" % obj.created_at.strftime("%d/%m/%Y %H:%M")
-        message_content += "Modificado: %s\n" % obj.updated_at.strftime("%d/%m/%Y %H:%M")
-        message_content += "Confirmar cambio en: %s\n" % link_to_change
+        message_subject = "%s '%s'" % (_('message_updated_project'),obj.project.name)
+        message_from = settings.EMAIL_FROM
+        message_content = "%s: %s\n\n" % (_('message_updated_project'),obj.project.name)
+        message_content += "%s: %s\n\n" % (_('message_change'), obj.name)
+        message_content += "%s: \n%s\n\n" % (_('message_description'),obj.description)
+        message_content += "%s: %s\n" % (_('message_created_at'),
+                                         obj.created_at.strftime("%d/%m/%Y %H:%M"))
+        message_content +=  "%s: %s\n" % (_('message_updated_at'),
+                                          obj.updated_at.strftime("%d/%m/%Y %H:%M"))
+        message_content += "%s: %s\n" % (_('message_confirm_change'),link_to_change)
 
         for u in responsible_users:
             g = Generated(change=obj,user=u)
@@ -92,8 +95,8 @@ class ChangeAdmin(admin.ModelAdmin):
                
         try:
             sent_messages = send_mass_mail(messages_to_responsible, fail_silently=False)
-            messages.info(request, 'Se enviaron %s notificaciones correspondientes a los responsables de proyecto' % sent_messages)
-            logging.error("Sent messages:  %s" % sent_messages)
+            messages.info(request,_('message_mails_sent') % {'emails':sent_messages} )
+            logging.info("Sent messages:  %s" % sent_messages)
         except Exception as e:
             logging.error("ERROR to sent messajes. %s" % e)
 
