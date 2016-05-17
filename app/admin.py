@@ -30,15 +30,9 @@ class ProjectAdmin(admin.ModelAdmin):
 
 class IntegrateInline(admin.TabularInline):
    model = Integration.projects.through
-#   fk_name = "project"
-#   fk_name = "integration"
-#   fields = ['integrate__project', 'integrate__integration']
    extra = 3
      
 class IntegrationAdmin(admin.ModelAdmin):
-    #list_display = ('integration', 'project',)
-    # search_fields = ['integration']
-    # ordering = ('integration',)
     inlines = [IntegrateInline,]
 
 class IntegrateAdmin(admin.ModelAdmin):
