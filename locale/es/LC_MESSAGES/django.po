@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-17 12:32-0300\n"
+"POT-Creation-Date: 2016-05-17 14:08-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,33 +18,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/admin.py:73 app/admin.py:75
+#: app/admin.py:30
+msgid "user_without_permissions"
+msgstr "El usuario %(user)s no tiene permisos para realizar esta acción"
+
+#: app/admin.py:75 app/admin.py:77
 msgid "message_updated_project"
 msgstr "Proyecto modificado"
 
-#: app/admin.py:76
+#: app/admin.py:78
 msgid "message_change"
 msgstr "Cambio"
 
-#: app/admin.py:77
+#: app/admin.py:79
 msgid "message_description"
 msgstr "Descripción"
 
-#: app/admin.py:78
+#: app/admin.py:80
 msgid "message_created_at"
 msgstr "Creado"
 
-#: app/admin.py:79
+#: app/admin.py:82
 msgid "message_updated_at"
 msgstr "Modificado"
 
-#: app/admin.py:80
+#: app/admin.py:84
 msgid "message_confirm_change"
 msgstr "Confirmar cambio en"
 
-#: app/admin.py:95
+#: app/admin.py:99
 msgid "message_mails_sent"
-msgstr "Se enviaron '%(emails)s' notificaciones correspondientes a los responsables de proyecto"
+msgstr ""
+"Se enviaron '%(emails)s' notificaciones correspondientes a los responsables "
+"de proyecto"
 
 #: app/models.py:15 app/models.py:37 app/models.py:57
 msgid "name"
@@ -132,10 +138,10 @@ msgstr "Integra"
 msgid "Integrates"
 msgstr "Integraciones"
 
-#: guppy/settings.py:118 guppy/settings.tpl.py:112
+#: guppy/settings.py:118 guppy/settings.tpl.py:123
 msgid "Spanish"
 msgstr "Español"
 
-#: guppy/settings.py:119 guppy/settings.tpl.py:113
+#: guppy/settings.py:119 guppy/settings.tpl.py:124
 msgid "English"
 msgstr "Inglés"

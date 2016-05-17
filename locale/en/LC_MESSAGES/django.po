@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-17 12:32-0300\n"
+"POT-Creation-Date: 2016-05-17 14:08-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,31 +17,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: app/admin.py:73 app/admin.py:75
+#: app/admin.py:30
+msgid "user_without_permissions"
+msgstr "User %(user)s does not have permission to perform this action"
+
+#: app/admin.py:75 app/admin.py:77
 msgid "message_updated_project"
 msgstr "Updated project"
 
-#: app/admin.py:76
+#: app/admin.py:78
 msgid "message_change"
 msgstr "Change"
 
-#: app/admin.py:77
+#: app/admin.py:79
 msgid "message_description"
 msgstr "Description"
 
-#: app/admin.py:78
+#: app/admin.py:80
 msgid "message_created_at"
 msgstr "Created at"
 
-#: app/admin.py:79
+#: app/admin.py:82
 msgid "message_updated_at"
 msgstr "Updated at"
 
-#: app/admin.py:80
+#: app/admin.py:84
 msgid "message_confirm_change"
 msgstr "Confirms change"
 
-#: app/admin.py:95
+#: app/admin.py:99
 msgid "message_mails_sent"
 msgstr "Message mails sent"
 
@@ -131,10 +135,10 @@ msgstr "Integrate"
 msgid "Integrates"
 msgstr "Integrates"
 
-#: guppy/settings.py:118 guppy/settings.tpl.py:112
+#: guppy/settings.py:118 guppy/settings.tpl.py:123
 msgid "Spanish"
 msgstr "Spanish"
 
-#: guppy/settings.py:119 guppy/settings.tpl.py:113
+#: guppy/settings.py:119 guppy/settings.tpl.py:124
 msgid "English"
 msgstr "English"

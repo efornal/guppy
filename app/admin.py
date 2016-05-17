@@ -13,16 +13,30 @@ import logging
 from django.conf import settings
 from django.contrib import messages
 from django.utils.translation import ugettext as _
+from django.core.exceptions import ValidationError
+
 
 es_formats.DATETIME_FORMAT = "d-m-Y H:i"
 
 
 class GeneratedAdmin(admin.ModelAdmin):
-    list_display = ('user', 'project_name', 'change',
+    list_display = ('change', 'user', 'project_name',
                     'updated_at', 'created_at', 'change_confirmed')
     search_fields = ['change']
     ordering = ('user',)
 
+    def save_model(self, request, obj, form, change):
+        try:
+            if not (request.user == obj.user):
+                raise ValidationError(  _('user_without_permissions') % {'user':request.user.username} )
+
+            obj.save()
+        except ValidationError as e:
+            messages.set_level(request, messages.ERROR)
+            messages.error(request,"%s" % e[0])
+
+
+        
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'integration_name', 'updated_at', 'created_at',)
     search_fields = ['name']
@@ -44,6 +58,18 @@ class ResponsableAdmin(admin.ModelAdmin):
                     'updated_at', 'created_at', 'validated_structure')
     search_fields = ['project']
     ordering = ('project',)
+
+    def save_model(self, request, obj, form, change):
+        try:
+            if not (request.user == obj.user):
+                raise ValidationError(  _('user_without_permissions') % {'user':request.user.username} )
+
+            obj.save()
+        except ValidationError as e:
+            messages.set_level(request, messages.ERROR)
+            messages.error(request,"%s" % e[0])
+
+
 
 class ChangeAdmin(admin.ModelAdmin):
     list_display = ('project', 'name',
