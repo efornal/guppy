@@ -27,7 +27,7 @@ class GeneratedAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         try:
-            if not (request.user == obj.user):
+            if not (request.user == obj.user) and (not request.user.is_superuser):
                 raise ValidationError(  _('user_without_permissions') % {'user':request.user.username} )
 
             obj.save()
@@ -61,7 +61,7 @@ class ResponsableAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         try:
-            if not (request.user == obj.user):
+            if not (request.user == obj.user) and (not request.user.is_superuser):
                 raise ValidationError(  _('user_without_permissions') % {'user':request.user.username} )
 
             obj.save()
