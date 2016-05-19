@@ -19,12 +19,53 @@ from django.core.exceptions import ValidationError
 es_formats.DATETIME_FORMAT = "d-m-Y H:i"
 
 
+
+class SpeciesListFilter(admin.SimpleListFilter):
+#    title = 'usuarios'
+#    parameter_name = 'user'
+#    default_value = None
+    
+#     def lookups(self, request, model_admin):
+#         list_of_species = []
+#         queryset = User.objects.all()
+# #        logging.error("========.::%s" % request.user.username)
+#         for species in queryset:
+# #            logging.error("========%s" % species.username)
+# #            if request.user.username == species.username:
+#             list_of_species.append(
+#                 (str(species.id), species.username)
+#             )
+#         return sorted(list_of_species, key=lambda tp: tp[1])
+
+    def queryset(self, request, queryset):
+        logging.error("========.::%s" % request.user.username)
+        logging.error("========.%s" % self.value())
+        return queryset.filter(user_id=request.user.id)
+#        if self.value():
+#            return queryset.filter(user_id=self.value())
+#        return queryset
+
+    # def value(self):
+    #     value = super(SpeciesListFilter, self).value()
+    #     if value is None:
+    #         if self.default_value is None:
+    #             # If there is at least one Species, return the first by name. Otherwise, None.
+    #             first_species = User.objects.order_by('username').first()
+    #             value = None if first_species is None else first_species.id
+    #             self.default_value = value
+    #         else:
+    #             value = self.default_value
+    #     return str(value)
+    
+    
 class NotificationAdmin(admin.ModelAdmin):
     list_display = ('change', 'user', 'project_name',
                     'updated_at', 'created_at', 'change_confirmed')
     search_fields = ['change']
     ordering = ('user',)
+    list_filter = (SpeciesListFilter, )
 
+    
     def save_model(self, request, obj, form, change):
         try:
             if not (request.user == obj.user) and (not request.user.is_superuser):
