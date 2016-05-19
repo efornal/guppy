@@ -49,9 +49,6 @@ class IntegrateInline(admin.TabularInline):
 class IntegrationAdmin(admin.ModelAdmin):
     inlines = [IntegrateInline,]
 
-class IntegrateAdmin(admin.ModelAdmin):
-    list_display = ('integration', 'project',)
-
     
 class ResponsableAdmin(admin.ModelAdmin):
     list_display = ('user', 'project',
@@ -122,7 +119,6 @@ class ChangeAdmin(admin.ModelAdmin):
 
             
 admin.site.register(Integration, IntegrationAdmin)
-admin.site.register(Integrate,IntegrateAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Change, ChangeAdmin)
 admin.site.register(Responsable, ResponsableAdmin)
