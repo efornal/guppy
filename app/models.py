@@ -5,10 +5,6 @@ from django.utils.translation import ugettext as _
 import logging
 
 
-
-
-
-
 class Project(models.Model):
     id = models.AutoField( primary_key=True,null=False)
     name = models.CharField( max_length=200,null=False,
@@ -93,7 +89,7 @@ class Responsable(models.Model):
         return "%s" % (self.validated_structure)
 
 
-class Generated(models.Model):
+class Notification(models.Model):
     change_confirmed = models.BooleanField(default=False,
                                           verbose_name=_('change_confirmed'))
     created_at = models.DateTimeField( auto_now_add=True,
@@ -108,9 +104,9 @@ class Generated(models.Model):
         return "%s" % obj.change.project.name
 
     class Meta:
-        db_table = 'generated'
-        verbose_name = _('Generated')
-        verbose_name_plural = _('Generated')
+        db_table = 'notifications'
+        verbose_name = _('Notification')
+        verbose_name_plural = _('Notifications')
 
     def __unicode__(self):
         return "%s" % (self.change_confirmed)

@@ -4,7 +4,7 @@ from app.models import Project
 from app.models import Integration
 from app.models import Change
 from app.models import Responsable
-from app.models import Generated
+from app.models import Notification
 from app.models import Integrate
 from django.contrib.auth.models import User
 from django.conf.locale.es import formats as es_formats
@@ -19,7 +19,7 @@ from django.core.exceptions import ValidationError
 es_formats.DATETIME_FORMAT = "d-m-Y H:i"
 
 
-class GeneratedAdmin(admin.ModelAdmin):
+class NotificationAdmin(admin.ModelAdmin):
     list_display = ('change', 'user', 'project_name',
                     'updated_at', 'created_at', 'change_confirmed')
     search_fields = ['change']
@@ -100,7 +100,7 @@ class ChangeAdmin(admin.ModelAdmin):
         message_content += "%s: %s\n" % (_('message_confirm_change'),link_to_change)
 
         for u in responsible_users:
-            g = Generated(change=obj,user=u)
+            g = Notification(change=obj,user=u)
             g.save()
 
             if u.email:
@@ -122,4 +122,4 @@ admin.site.register(Integration, IntegrationAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Change, ChangeAdmin)
 admin.site.register(Responsable, ResponsableAdmin)
-admin.site.register(Generated, GeneratedAdmin)
+admin.site.register(Notification, NotificationAdmin)
