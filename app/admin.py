@@ -91,7 +91,6 @@ class NotificationAdmin(admin.ModelAdmin):
     search_fields = ['change']
     ordering = ('user',)
     list_filter = (NotificationListFilter, )
-    readonly_fields = ['user', 'change']
     
     def save_model(self, request, obj, form, change):
         try:
@@ -102,6 +101,12 @@ class NotificationAdmin(admin.ModelAdmin):
         except ValidationError as e:
             messages.set_level(request, messages.ERROR)
             messages.error(request,"%s" % e[0])
+
+    def get_readonly_fields(self, request, obj=None):
+        if request.user.is_superuser:
+            return super(NotificationAdmin, self).get_readonly_fields(request, obj)
+        else:
+            return ('user', 'change')
 
 
         
@@ -129,7 +134,6 @@ class ResponsableAdmin(admin.ModelAdmin):
     search_fields = ['project']
     ordering = ('project',)
     list_filter = (ResponsableListFilter, )
-    readonly_fields = ['user', 'project']
         
     def save_model(self, request, obj, form, change):
         try:
@@ -141,7 +145,11 @@ class ResponsableAdmin(admin.ModelAdmin):
             messages.set_level(request, messages.ERROR)
             messages.error(request,"%s" % e[0])
 
-
+    def get_readonly_fields(self, request, obj=None):
+        if request.user.is_superuser:
+            return super(ResponsableAdmin, self).get_readonly_fields(request, obj)
+        else:
+            return ('user', 'project')
 
 
     
