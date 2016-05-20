@@ -19,7 +19,39 @@ from django.core.exceptions import ValidationError
 es_formats.DATETIME_FORMAT = "d-m-Y H:i"
 
 
+class ResponsableListFilter(admin.SimpleListFilter):
+    title = _('user')
+    parameter_name = 'user'
+    default_value = None
+    
+    def lookups(self, request, model_admin):
+        self.default_value = request.user.id
+        list_of_users = []
+        queryset = User.objects.all()
+        for user in queryset:
+            list_of_users.append(
+                (str(user.id), user.username)
+            )
+        return sorted(list_of_users, key=lambda tp: tp[1])
+    
+    def queryset(self, request, queryset):
+        self.default_value = request.user.id
+        if self.value():
+            return queryset.filter(user_id=self.value())
 
+    def value(self):
+        value = super(ResponsableListFilter, self).value()
+        if value is None:
+            if self.default_value is None:
+                first_record = User.objects.order_by('username').first()
+                value = None if first_record is None else first_record.id
+                self.default_value = value
+            else:
+                value = self.default_value
+        return str(value)
+
+    
+    
 class NotificationListFilter(admin.SimpleListFilter):
     title = _('user')
     parameter_name = 'user'
@@ -44,13 +76,15 @@ class NotificationListFilter(admin.SimpleListFilter):
         value = super(NotificationListFilter, self).value()
         if value is None:
             if self.default_value is None:
-                first_notification = User.objects.order_by('username').first()
-                value = None if first_notification is None else first_notification.id
+                first_record = User.objects.order_by('username').first()
+                value = None if first_record is None else first_record.id
                 self.default_value = value
             else:
                 value = self.default_value
         return str(value)
 
+
+    
 class NotificationAdmin(admin.ModelAdmin):
     list_display = ('change', 'user', 'project_name',
                     'updated_at', 'created_at', 'change_confirmed')
@@ -76,12 +110,17 @@ class ProjectAdmin(admin.ModelAdmin):
     search_fields = ['name']
     ordering = ('name',)
 
+
+    
 class IntegrateInline(admin.TabularInline):
    model = Integration.projects.through
    extra = 3
-     
+
+
+   
 class IntegrationAdmin(admin.ModelAdmin):
     inlines = [IntegrateInline,]
+
 
     
 class ResponsableAdmin(admin.ModelAdmin):
@@ -89,7 +128,8 @@ class ResponsableAdmin(admin.ModelAdmin):
                     'updated_at', 'created_at', 'validated_structure')
     search_fields = ['project']
     ordering = ('project',)
-
+    list_filter = (ResponsableListFilter, )
+    
     def save_model(self, request, obj, form, change):
         try:
             if not (request.user == obj.user) and (not request.user.is_superuser):
@@ -103,7 +143,7 @@ class ResponsableAdmin(admin.ModelAdmin):
 
 
 class ChangeAdmin(admin.ModelAdmin):
-    list_display = ('project', 'name',
+    list_display = ('name', 'project',
                     'updated_at', 'created_at')
     search_fields = ['name']
     ordering = ('project',)
