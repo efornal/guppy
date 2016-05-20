@@ -129,7 +129,8 @@ class ResponsableAdmin(admin.ModelAdmin):
     search_fields = ['project']
     ordering = ('project',)
     list_filter = (ResponsableListFilter, )
-    
+    readonly_fields = ['user', 'project']
+        
     def save_model(self, request, obj, form, change):
         try:
             if not (request.user == obj.user) and (not request.user.is_superuser):
