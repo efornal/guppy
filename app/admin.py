@@ -84,14 +84,14 @@ class NotificationListFilter(admin.SimpleListFilter):
         return str(value)
 
 
-    
+
 class NotificationAdmin(admin.ModelAdmin):
     list_display = ('change', 'user', 'project_name',
                     'updated_at', 'created_at', 'change_confirmed')
     search_fields = ['change']
     ordering = ('user',)
     list_filter = (NotificationListFilter, )
-
+    readonly_fields = ['user', 'change']
     
     def save_model(self, request, obj, form, change):
         try:
@@ -142,12 +142,14 @@ class ResponsableAdmin(admin.ModelAdmin):
 
 
 
+
+    
 class ChangeAdmin(admin.ModelAdmin):
     list_display = ('name', 'project',
                     'updated_at', 'created_at')
     search_fields = ['name']
     ordering = ('project',)
-
+    
     def save_model(self, request, obj, form, change):
             
         obj.save()
