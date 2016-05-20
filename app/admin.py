@@ -14,7 +14,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.utils.translation import ugettext as _
 from django.core.exceptions import ValidationError
-
+from django.forms.models import ModelChoiceField
 
 es_formats.DATETIME_FORMAT = "d-m-Y H:i"
 
@@ -191,7 +191,18 @@ class ChangeAdmin(admin.ModelAdmin):
         except Exception as e:
             logging.error("ERROR to sent messajes. %s" % e)
 
-            
+
+    # changes the query on the list of projects
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "project":
+            queryset = Project.objects.filter(responsable__user_id=request.user.id)
+            return ModelChoiceField(queryset, initial=None)
+        else:
+            return super(ChangeAdmin, self).formfield_for_foreignkey(db_field, 
+                                                              request, **kwargs)
+
+
+        
 admin.site.register(Integration, IntegrationAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Change, ChangeAdmin)
