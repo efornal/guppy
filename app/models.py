@@ -86,7 +86,7 @@ class Responsable(models.Model):
         verbose_name_plural = _('responsible')
 
     def __unicode__(self):
-        return "%s" % (self.validated_structure)
+        return "%s %s %s" % (self.user.username,_('of'),self.project.name)
 
 
 class Notification(models.Model):
@@ -109,7 +109,7 @@ class Notification(models.Model):
         verbose_name_plural = _('Notifications')
 
     def __unicode__(self):
-        return "%s" % (self.change_confirmed)
+        return "%s %s %s" % (self.change.name,_('by'),self.user.username)
 
 
 class Integrate(models.Model):

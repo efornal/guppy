@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-17 14:08-0300\n"
+"POT-Creation-Date: 2016-05-23 08:37-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,121 +17,133 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: app/admin.py:30
-msgid "user_without_permissions"
-msgstr "User %(user)s does not have permission to perform this action"
-
-#: app/admin.py:75 app/admin.py:77
-msgid "message_updated_project"
-msgstr "Updated project"
-
-#: app/admin.py:78
-msgid "message_change"
-msgstr "Change"
-
-#: app/admin.py:79
-msgid "message_description"
-msgstr "Description"
-
-#: app/admin.py:80
-msgid "message_created_at"
-msgstr "Created at"
-
-#: app/admin.py:82
-msgid "message_updated_at"
-msgstr "Updated at"
-
-#: app/admin.py:84
-msgid "message_confirm_change"
-msgstr "Confirms change"
-
-#: app/admin.py:99
-msgid "message_mails_sent"
-msgstr "Message mails sent"
-
-#: app/models.py:15 app/models.py:37 app/models.py:57
-msgid "name"
-msgstr "Name"
-
-#: app/models.py:17 app/models.py:39 app/models.py:59
-msgid "description"
-msgstr "Description"
-
-#: app/models.py:19 app/models.py:41 app/models.py:61 app/models.py:79
-#: app/models.py:100
-msgid "created_at"
-msgstr "Created at"
-
-#: app/models.py:21 app/models.py:43 app/models.py:63 app/models.py:81
-#: app/models.py:102
-msgid "updated_at"
-msgstr "Updated at"
-
-#: app/models.py:25
-msgid "Project"
-msgstr "Project"
-
-#: app/models.py:26
-msgid "Projects"
-msgstr "Projects"
-
-#: app/models.py:48
-msgid "Integration"
-msgstr "Integration"
-
-#: app/models.py:49
-msgid "Integrations"
-msgstr "Integrations"
-
-#: app/models.py:65 app/models.py:83 app/models.py:121
-msgid "project"
-msgstr "Project"
-
-#: app/models.py:69
-msgid "Change"
-msgstr "Change"
-
-#: app/models.py:70
-msgid "Changes"
-msgstr "Changes"
-
-#: app/models.py:77
-msgid "validated_structure"
-msgstr ""
-
-#: app/models.py:85 app/models.py:106
+#: app/admin.py:23 app/admin.py:56 app/models.py:81 app/models.py:102
 msgid "user"
 msgstr "User"
 
-#: app/models.py:89
+#: app/admin.py:98 app/admin.py:141
+msgid "user_without_permissions"
+msgstr "User %(user)s does not have permission to perform this action"
+
+#: app/admin.py:176 app/admin.py:178
+msgid "message_updated_project"
+msgstr "Updated project"
+
+#: app/admin.py:179
+msgid "message_change"
+msgstr "Change"
+
+#: app/admin.py:180
+msgid "message_description"
+msgstr "Description"
+
+#: app/admin.py:181
+msgid "message_created_at"
+msgstr "Created at"
+
+#: app/admin.py:183
+msgid "message_updated_at"
+msgstr "Updated at"
+
+#: app/admin.py:185
+msgid "message_confirm_change"
+msgstr "Confirms change"
+
+#: app/admin.py:200
+msgid "message_mails_sent"
+msgstr "Message mails sent"
+
+#: app/models.py:11 app/models.py:33 app/models.py:53
+msgid "name"
+msgstr "Name"
+
+#: app/models.py:13 app/models.py:35 app/models.py:55
+msgid "description"
+msgstr "Description"
+
+#: app/models.py:15 app/models.py:37 app/models.py:57 app/models.py:75
+#: app/models.py:96
+msgid "created_at"
+msgstr "Created at"
+
+#: app/models.py:17 app/models.py:39 app/models.py:59 app/models.py:77
+#: app/models.py:98
+msgid "updated_at"
+msgstr "Updated at"
+
+#: app/models.py:21
+msgid "Project"
+msgstr "Project"
+
+#: app/models.py:22
+msgid "Projects"
+msgstr "Projects"
+
+#: app/models.py:44
+msgid "Integration"
+msgstr "Integration"
+
+#: app/models.py:45
+msgid "Integrations"
+msgstr "Integrations"
+
+#: app/models.py:61 app/models.py:79 app/models.py:117
+msgid "project"
+msgstr "Project"
+
+#: app/models.py:65
+msgid "Change"
+msgstr "Change"
+
+#: app/models.py:66
+msgid "Changes"
+msgstr "Changes"
+
+#: app/models.py:73
+msgid "validated_structure"
+msgstr "Validated structure"
+
+#: app/models.py:85
 msgid "Responsable"
 msgstr "Responsable"
 
-#: app/models.py:90
+#: app/models.py:86
 msgid "responsible"
 msgstr "Responsible"
 
-#: app/models.py:98
+#: app/models.py:89
+msgid "of"
+msgstr "of"
+
+#: app/models.py:94
 msgid "change_confirmed"
 msgstr "Change confirmed"
 
-#: app/models.py:104
+#: app/models.py:100
 msgid "change"
 msgstr "Change"
 
-#: app/models.py:112 app/models.py:113
-msgid "Generated"
-msgstr "Generated"
+#: app/models.py:108
+msgid "Notification"
+msgstr "Notification"
 
-#: app/models.py:123
+#: app/models.py:109
+msgid "Notifications"
+msgstr "Notifications"
+
+#: app/models.py:112
+msgid "by"
+msgstr "by"
+
+#: app/models.py:119
 msgid "integration"
 msgstr "Integration"
 
-#: app/models.py:127
+#: app/models.py:123
 msgid "Integrate"
 msgstr "Integrate"
 
-#: app/models.py:128
+#: app/models.py:124
 msgid "Integrates"
 msgstr "Integrates"
 
@@ -142,3 +154,6 @@ msgstr "Spanish"
 #: guppy/settings.py:119 guppy/settings.tpl.py:124
 msgid "English"
 msgstr "English"
+
+#~ msgid "Generated"
+#~ msgstr "Generated"
