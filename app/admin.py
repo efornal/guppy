@@ -25,7 +25,8 @@ class ResponsableListFilter(admin.SimpleListFilter):
     default_value = None
     
     def lookups(self, request, model_admin):
-        self.default_value = request.user.id
+        if not request.user.is_superuser:
+            self.default_value = request.user.id
         list_of_users = []
         queryset = User.objects.all()
         for user in queryset:
@@ -35,22 +36,15 @@ class ResponsableListFilter(admin.SimpleListFilter):
         return sorted(list_of_users, key=lambda tp: tp[1])
     
     def queryset(self, request, queryset):
-        self.default_value = request.user.id
         if self.value():
             return queryset.filter(user_id=self.value())
 
     def value(self):
         value = super(ResponsableListFilter, self).value()
         if value is None:
-            if self.default_value is None:
-                first_record = User.objects.order_by('username').first()
-                value = None if first_record is None else first_record.id
-                self.default_value = value
-            else:
-                value = self.default_value
-        return str(value)
+            value = self.default_value
+        return value
 
-    
     
 class NotificationListFilter(admin.SimpleListFilter):
     title = _('user')
@@ -58,7 +52,8 @@ class NotificationListFilter(admin.SimpleListFilter):
     default_value = None
     
     def lookups(self, request, model_admin):
-        self.default_value = request.user.id
+        if not request.user.is_superuser:
+            self.default_value = request.user.id
         list_of_users = []
         queryset = User.objects.all()
         for user in queryset:
@@ -68,20 +63,14 @@ class NotificationListFilter(admin.SimpleListFilter):
         return sorted(list_of_users, key=lambda tp: tp[1])
     
     def queryset(self, request, queryset):
-        self.default_value = request.user.id
         if self.value():
             return queryset.filter(user_id=self.value())
 
     def value(self):
         value = super(NotificationListFilter, self).value()
         if value is None:
-            if self.default_value is None:
-                first_record = User.objects.order_by('username').first()
-                value = None if first_record is None else first_record.id
-                self.default_value = value
-            else:
-                value = self.default_value
-        return str(value)
+            value = self.default_value
+        return value
 
 
 
@@ -92,13 +81,6 @@ class NotificationAdmin(admin.ModelAdmin):
     ordering = ('user',)
     list_filter = (NotificationListFilter, )
 
-    
-    def changelist_view(self, request, extra_context=None):    
-        if request.user.is_superuser:
-            self.list_filter = None
-        return super(NotificationAdmin, self).changelist_view(request, extra_context)
-
-    
     def save_model(self, request, obj, form, change):
         try:
             if not (request.user == obj.user) and (not request.user.is_superuser):
@@ -141,12 +123,6 @@ class ResponsableAdmin(admin.ModelAdmin):
     search_fields = ['project']
     ordering = ('project',)
     list_filter = (ResponsableListFilter, )
-
-    
-    def changelist_view(self, request, extra_context=None):    
-        if request.user.is_superuser:
-            self.list_filter = None
-        return super(ResponsableAdmin, self).changelist_view(request, extra_context)
 
     
     def save_model(self, request, obj, form, change):
