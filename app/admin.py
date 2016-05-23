@@ -91,6 +91,13 @@ class NotificationAdmin(admin.ModelAdmin):
     search_fields = ['change']
     ordering = ('user',)
     list_filter = (NotificationListFilter, )
+
+    
+    def changelist_view(self, request, extra_context=None):    
+        if request.user.is_superuser:
+            self.list_filter = None
+        return super(NotificationAdmin, self).changelist_view(request, extra_context)
+
     
     def save_model(self, request, obj, form, change):
         try:
@@ -134,7 +141,14 @@ class ResponsableAdmin(admin.ModelAdmin):
     search_fields = ['project']
     ordering = ('project',)
     list_filter = (ResponsableListFilter, )
-        
+
+    
+    def changelist_view(self, request, extra_context=None):    
+        if request.user.is_superuser:
+            self.list_filter = None
+        return super(ResponsableAdmin, self).changelist_view(request, extra_context)
+
+    
     def save_model(self, request, obj, form, change):
         try:
             if not (request.user == obj.user) and (not request.user.is_superuser):
