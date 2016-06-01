@@ -15,6 +15,10 @@ from django.contrib import messages
 from django.utils.translation import ugettext as _
 from django.core.exceptions import ValidationError
 from django.forms.models import ModelChoiceField
+from django.forms.widgets import Textarea
+from django.db import models
+
+
 
 es_formats.DATETIME_FORMAT = "d-m-Y H:i"
 
@@ -141,14 +145,17 @@ class ResponsableAdmin(admin.ModelAdmin):
         else:
             return ('user', 'project')
 
-
     
 class ChangeAdmin(admin.ModelAdmin):
     list_display = ('name', 'project',
                     'updated_at', 'created_at')
     search_fields = ['name']
     ordering = ('project',)
-    
+    formfield_overrides = {
+        models.TextField: {'widget': Textarea(
+            attrs={'rows': 15,})},
+    }
+
     def save_model(self, request, obj, form, change):
             
         obj.save()
