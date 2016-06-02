@@ -158,9 +158,13 @@ class ResponsableAdmin(admin.ModelAdmin):
             return super(ResponsableAdmin, self).get_readonly_fields(request, obj)
         else:
             if obj.user.pk == request.user.pk:
-                return ('user', 'project')
+                if obj.validated_structure:
+                    return ('user', 'project', 'attachment', 'validated_structure')
+                else:
+                    return ('user', 'project')
             else:
-                return ('user', 'project', 'attachment')
+                return ('user', 'project', 'attachment', 'validated_structure')
+            
 
     
 class ChangeAdmin(admin.ModelAdmin):
