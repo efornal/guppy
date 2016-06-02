@@ -108,6 +108,14 @@ class ProjectAdmin(admin.ModelAdmin):
     search_fields = ['name']
     ordering = ('name',)
 
+    def get_readonly_fields(self, request, obj=None):
+        if request.user.is_superuser:
+            return super(ProjectAdmin, self).get_readonly_fields(request, obj)
+        else:
+            if obj.has_as_responsible(request.user.pk):
+                return ('name', 'integration_name',)
+            else:
+                return ('name', 'description', 'integration_name',)
 
     
 class IntegrateInline(admin.TabularInline):
@@ -118,6 +126,12 @@ class IntegrateInline(admin.TabularInline):
    
 class IntegrationAdmin(admin.ModelAdmin):
     inlines = [IntegrateInline,]
+
+    def get_readonly_fields(self, request, obj=None):
+        if request.user.is_superuser:
+            return super(IntegrationAdmin, self).get_readonly_fields(request, obj)
+        else:
+            return ('name', 'description', 'projects')
 
 
     

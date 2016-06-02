@@ -27,6 +27,13 @@ class Project(models.Model):
     def integration_name(obj):
         return "%s" % obj.name
 
+    def has_as_responsible(self,user_id):
+        projects = Project.objects.filter(responsable__user_id=user_id).filter(pk=self.pk)
+        if len(projects) > 0:
+            return True
+        return False
+
+    
 class Integration(models.Model):
     id = models.AutoField( primary_key=True,null=False)
     name = models.CharField( max_length=200,null=False,
