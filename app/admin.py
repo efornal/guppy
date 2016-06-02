@@ -157,7 +157,10 @@ class ResponsableAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return super(ResponsableAdmin, self).get_readonly_fields(request, obj)
         else:
-            return ('user', 'project')
+            if obj.user.pk == request.user.pk:
+                return ('user', 'project')
+            else:
+                return ('user', 'project', 'attachment')
 
     
 class ChangeAdmin(admin.ModelAdmin):
