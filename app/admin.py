@@ -99,7 +99,14 @@ class NotificationAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return super(NotificationAdmin, self).get_readonly_fields(request, obj)
         else:
-            return ('user', 'change')
+            if obj.user.pk == request.user.pk:
+                if obj.change_confirmed:
+                    return ('user', 'change', 'change_confirmed')
+                else:
+                    return ('user', 'change')
+            else:
+                return ('user', 'change', 'change_confirmed')
+                
 
 
         
