@@ -24,8 +24,13 @@ class Project(models.Model):
     def __unicode__(self):
         return "%s" % (self.name)
     
-    def integration_name(obj):
-        return "%s" % obj.name
+    def integrations_name(obj):
+        integrations = Integration.objects.filter(projects__id=obj.pk)
+        names = []
+        for i in integrations:
+            names.append(str(i.name))
+        return ', '.join(names)
+    integrations_name.short_description = _("integrations_name")
 
     def has_as_responsible(self,user_id):
         projects = Project.objects.filter(responsable__user_id=user_id).filter(pk=self.pk)
@@ -44,7 +49,8 @@ class Integration(models.Model):
                                        verbose_name=_('created_at'))
     updated_at = models.DateTimeField( auto_now=True,
                                        verbose_name=_('updated_at'))
-    projects = models.ManyToManyField(Project, through='Integrate')
+    projects = models.ManyToManyField(Project, through='Integrate',
+                                      verbose_name=_('projects'))
 
     class Meta:
         db_table = 'integrations'
@@ -90,7 +96,8 @@ class Responsable(models.Model):
     user = models.ForeignKey(User, null=False, default=None,
                                     verbose_name=_('user'))
     attachment = models.FileField(default=None, null=True, blank=True,
-                                  upload_to=responsable_attachment_path)
+                                  upload_to=responsable_attachment_path,
+                                  verbose_name=_('attachment'))
     
     class Meta:
         db_table = 'responsible'

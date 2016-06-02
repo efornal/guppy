@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-23 08:37-0300\n"
+"POT-Creation-Date: 2016-06-02 11:16-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,59 +18,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/admin.py:23 app/admin.py:56 app/models.py:81 app/models.py:102
+#: app/admin.py:27 app/admin.py:54 app/models.py:97 app/models.py:121
 msgid "user"
 msgstr "Usuario"
 
-#: app/admin.py:98 app/admin.py:141
+#: app/admin.py:91 app/admin.py:149
 msgid "user_without_permissions"
 msgstr "El usuario %(user)s no tiene permisos para realizar esta acción"
 
-#: app/admin.py:176 app/admin.py:178
+#: app/admin.py:187 app/admin.py:189
 msgid "message_updated_project"
 msgstr "Proyecto modificado"
 
-#: app/admin.py:179
+#: app/admin.py:190
 msgid "message_change"
 msgstr "Cambio"
 
-#: app/admin.py:180
+#: app/admin.py:191
 msgid "message_description"
 msgstr "Descripción"
 
-#: app/admin.py:181
+#: app/admin.py:192
 msgid "message_created_at"
 msgstr "Creado"
 
-#: app/admin.py:183
+#: app/admin.py:194
 msgid "message_updated_at"
 msgstr "Modificado"
 
-#: app/admin.py:185
+#: app/admin.py:196
 msgid "message_confirm_change"
 msgstr "Confirmar cambio en"
 
-#: app/admin.py:200
+#: app/admin.py:211
 msgid "message_mails_sent"
 msgstr ""
 "Se enviaron '%(emails)s' notificaciones correspondientes a los responsables "
 "de proyecto"
 
-#: app/models.py:11 app/models.py:33 app/models.py:53
+#: app/models.py:11 app/models.py:45 app/models.py:66
 msgid "name"
 msgstr "Nombre"
 
-#: app/models.py:13 app/models.py:35 app/models.py:55
+#: app/models.py:13 app/models.py:47 app/models.py:68
 msgid "description"
 msgstr "Descripción"
 
-#: app/models.py:15 app/models.py:37 app/models.py:57 app/models.py:75
-#: app/models.py:96
+#: app/models.py:15 app/models.py:49 app/models.py:70 app/models.py:91
+#: app/models.py:115
 msgid "created_at"
 msgstr "Creado"
 
-#: app/models.py:17 app/models.py:39 app/models.py:59 app/models.py:77
-#: app/models.py:98
+#: app/models.py:17 app/models.py:51 app/models.py:72 app/models.py:93
+#: app/models.py:117
 msgid "updated_at"
 msgstr "Modificado"
 
@@ -82,79 +82,91 @@ msgstr "Proyecto"
 msgid "Projects"
 msgstr "Proyectos"
 
-#: app/models.py:44
+#: app/models.py:33
+msgid "integrations_name"
+msgstr "Integraciones"
+
+#: app/models.py:53
+msgid "projects"
+msgstr "Proyectos"
+
+#: app/models.py:57
 msgid "Integration"
 msgstr "Integración"
 
-#: app/models.py:45
+#: app/models.py:58
 msgid "Integrations"
 msgstr "Integraciones"
 
-#: app/models.py:61 app/models.py:79 app/models.py:117
+#: app/models.py:74 app/models.py:95 app/models.py:136
 msgid "project"
 msgstr "Proyecto"
 
-#: app/models.py:65
+#: app/models.py:78
 msgid "Change"
 msgstr "Cambio"
 
-#: app/models.py:66
+#: app/models.py:79
 msgid "Changes"
 msgstr "Cambios"
 
-#: app/models.py:73
+#: app/models.py:89
 msgid "validated_structure"
 msgstr "estructura validada"
 
-#: app/models.py:85
+#: app/models.py:100
+msgid "attachment"
+msgstr ""
+
+#: app/models.py:104
 msgid "Responsable"
 msgstr "Responsable"
 
-#: app/models.py:86
+#: app/models.py:105
 msgid "responsible"
 msgstr "Responsable"
 
-#: app/models.py:89
+#: app/models.py:108
 msgid "of"
 msgstr "de"
 
-#: app/models.py:94
+#: app/models.py:113
 msgid "change_confirmed"
 msgstr "Cambio confirmado"
 
-#: app/models.py:100
+#: app/models.py:119
 msgid "change"
 msgstr "Cambio"
 
-#: app/models.py:108
+#: app/models.py:127
 msgid "Notification"
 msgstr "Notificación"
 
-#: app/models.py:109
+#: app/models.py:128
 msgid "Notifications"
 msgstr "Notificaciones"
 
-#: app/models.py:112
+#: app/models.py:131
 msgid "by"
 msgstr "por"
 
-#: app/models.py:119
+#: app/models.py:138
 msgid "integration"
 msgstr "Integración"
 
-#: app/models.py:123
+#: app/models.py:142
 msgid "Integrate"
 msgstr "Integra"
 
-#: app/models.py:124
+#: app/models.py:143
 msgid "Integrates"
 msgstr "Integraciones"
 
-#: guppy/settings.py:118 guppy/settings.tpl.py:123
+#: guppy/settings.py:120 guppy/settings.tpl.py:124
 msgid "Spanish"
 msgstr "Español"
 
-#: guppy/settings.py:119 guppy/settings.tpl.py:124
+#: guppy/settings.py:121 guppy/settings.tpl.py:125
 msgid "English"
 msgstr "Inglés"
 

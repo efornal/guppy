@@ -104,7 +104,7 @@ class NotificationAdmin(admin.ModelAdmin):
 
         
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('name', 'integration_name', 'updated_at', 'created_at',)
+    list_display = ('name', 'integrations_name', 'updated_at', 'created_at',)
     search_fields = ['name']
     ordering = ('name',)
 
