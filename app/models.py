@@ -74,6 +74,9 @@ class Change(models.Model):
 
     def __unicode__(self):
         return "%s" % (self.name)
+    
+def responsable_attachment_path(instance, filename):
+    return 'responsable_{0}/{1}'.format(instance.id, filename)
 
 class Responsable(models.Model):
     validated_structure = models.BooleanField(default=False,
@@ -86,7 +89,9 @@ class Responsable(models.Model):
                                     verbose_name=_('project'))
     user = models.ForeignKey(User, null=False, default=None,
                                     verbose_name=_('user'))
-
+    attachment = models.FileField(default=None, null=True, blank=True,
+                                  upload_to=responsable_attachment_path)
+    
     class Meta:
         db_table = 'responsible'
         verbose_name = _('Responsable')
