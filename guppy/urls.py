@@ -22,4 +22,4 @@ from django.views.generic.base import RedirectView
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', RedirectView.as_view(pattern_name='admin:index', permanent=False))
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static('/media/', document_root=settings.MEDIA_ROOT)
