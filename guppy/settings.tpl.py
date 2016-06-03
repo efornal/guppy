@@ -136,13 +136,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-
+#STATIC_ROOT = '/srv/guppy/shared/static'
 STATIC_URL = '/static/'
 LOGIN_URL='/app/login/'
 
 # media files
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = '/srv/guppy/shared/media'
+MEDIA_URL = '/test/guppy/media/'
 
 # =================================\
 # django ldap configuration
