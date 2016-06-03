@@ -28,7 +28,7 @@ class Project(models.Model):
         integrations = Integration.objects.filter(projects__id=obj.pk)
         names = []
         for i in integrations:
-            names.append(str(i.name))
+            names.append(unicode(i.name))
         return ', '.join(names)
     integrations_name.short_description = _("integrations_name")
 
