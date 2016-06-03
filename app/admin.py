@@ -120,9 +120,9 @@ class ProjectAdmin(admin.ModelAdmin):
             return super(ProjectAdmin, self).get_readonly_fields(request, obj)
         else:
             if obj.has_as_responsible(request.user.pk):
-                return ('name', 'integration_name',)
+                return ('name', 'integrations_name',)
             else:
-                return ('name', 'description', 'integration_name',)
+                return ('name', 'description', 'integrations_name',)
 
     
 class IntegrateInline(admin.TabularInline):
