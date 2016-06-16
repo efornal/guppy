@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-02 11:16-0300\n"
+"POT-Creation-Date: 2016-06-16 08:26-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,35 +22,35 @@ msgstr ""
 msgid "user"
 msgstr "Usuario"
 
-#: app/admin.py:91 app/admin.py:149
+#: app/admin.py:91 app/admin.py:156
 msgid "user_without_permissions"
 msgstr "El usuario %(user)s no tiene permisos para realizar esta acción"
 
-#: app/admin.py:187 app/admin.py:189
+#: app/admin.py:201 app/admin.py:203
 msgid "message_updated_project"
 msgstr "Proyecto modificado"
 
-#: app/admin.py:190
+#: app/admin.py:204
 msgid "message_change"
 msgstr "Cambio"
 
-#: app/admin.py:191
+#: app/admin.py:205
 msgid "message_description"
 msgstr "Descripción"
 
-#: app/admin.py:192
+#: app/admin.py:206
 msgid "message_created_at"
 msgstr "Creado"
 
-#: app/admin.py:194
+#: app/admin.py:208
 msgid "message_updated_at"
 msgstr "Modificado"
 
-#: app/admin.py:196
+#: app/admin.py:210
 msgid "message_confirm_change"
 msgstr "Confirmar cambio en"
 
-#: app/admin.py:211
+#: app/admin.py:225
 msgid "message_mails_sent"
 msgstr ""
 "Se enviaron '%(emails)s' notificaciones correspondientes a los responsables "
@@ -98,7 +98,7 @@ msgstr "Integración"
 msgid "Integrations"
 msgstr "Integraciones"
 
-#: app/models.py:74 app/models.py:95 app/models.py:136
+#: app/models.py:74 app/models.py:95 app/models.py:139
 msgid "project"
 msgstr "Proyecto"
 
@@ -116,7 +116,7 @@ msgstr "estructura validada"
 
 #: app/models.py:100
 msgid "attachment"
-msgstr ""
+msgstr "Archivo adjunto"
 
 #: app/models.py:104
 msgid "Responsable"
@@ -138,27 +138,31 @@ msgstr "Cambio confirmado"
 msgid "change"
 msgstr "Cambio"
 
-#: app/models.py:127
+#: app/models.py:123
+msgid "comment"
+msgstr "Comentario"
+
+#: app/models.py:130
 msgid "Notification"
 msgstr "Notificación"
 
-#: app/models.py:128
+#: app/models.py:131
 msgid "Notifications"
 msgstr "Notificaciones"
 
-#: app/models.py:131
+#: app/models.py:134
 msgid "by"
 msgstr "por"
 
-#: app/models.py:138
+#: app/models.py:141
 msgid "integration"
 msgstr "Integración"
 
-#: app/models.py:142
+#: app/models.py:145
 msgid "Integrate"
 msgstr "Integra"
 
-#: app/models.py:143
+#: app/models.py:146
 msgid "Integrates"
 msgstr "Integraciones"
 

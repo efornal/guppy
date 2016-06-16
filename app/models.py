@@ -119,6 +119,9 @@ class Notification(models.Model):
                                     verbose_name=_('change'))
     user = models.ForeignKey(User, null=False, default=None,
                                     verbose_name=_('user'))
+    comment = models.TextField( null=True, blank=True,
+                                verbose_name=_('comment'))
+
     def project_name(obj):
         return "%s" % obj.change.project.name
 
