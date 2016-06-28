@@ -184,6 +184,9 @@ class ChangeAdmin(admin.ModelAdmin):
             attrs={'rows': 15,})},
     }
 
+    def get_readonly_fields(self, request, obj=None):
+         return [field.name for field in Change._meta.fields if field.name != "id"]
+     
     def save_model(self, request, obj, form, change):
             
         obj.save()
