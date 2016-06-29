@@ -175,15 +175,14 @@ class ResponsableAdmin(admin.ModelAdmin):
 
     
 class ChangeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'project',
-                    'updated_at', 'created_at')
+    list_display = ('name', 'project', 'updated_at', 'created_at', 'confirmed_changes')
     search_fields = ['name']
     ordering = ('project',)
     formfield_overrides = {
         models.TextField: {'widget': Textarea(
             attrs={'rows': 15,})},
     }
-
+ 
     def get_readonly_fields(self, request, obj=None):
         if obj is None:
             return self.readonly_fields

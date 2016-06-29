@@ -60,6 +60,7 @@ class Integration(models.Model):
     def __unicode__(self):
         return "%s" % (self.name)
 
+    
 class Change(models.Model):
     id = models.AutoField( primary_key=True,null=False)
     name = models.CharField( max_length=200,null=False,
@@ -80,6 +81,12 @@ class Change(models.Model):
 
     def __unicode__(self):
         return "%s" % (self.name)
+
+    def confirmed_changes(self):
+        n = Notification.objects.filter(change=self.id).filter(change_confirmed=False)
+        return ( len(n) == 0 )
+
+    
     
 def responsable_attachment_path(instance, filename):
     return 'responsable_{0}/{1}'.format(instance.id, filename)
