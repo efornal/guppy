@@ -201,7 +201,7 @@ msgstr "Ver en el sitio"
 #: templates/admin/change_form.html:124
 #, python-format
 msgid "Add %(name)s"
-msgstr "Add %(name)s"
+msgstr "Agregar %(name)s"
 
 #: templates/admin/change_form.html:153
 msgid "Please correct the error below."
