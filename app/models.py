@@ -85,7 +85,7 @@ class Change(models.Model):
     def confirmed_changes(self):
         n = Notification.objects.filter(change=self.id).filter(change_confirmed=False)
         return ( len(n) == 0 )
-
+    confirmed_changes.boolean = True
     
     
 def responsable_attachment_path(instance, filename):
