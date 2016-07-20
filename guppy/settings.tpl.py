@@ -27,7 +27,7 @@ SECRET_KEY = '@wbz9(i^_7t+td&ho&cy5hs6k!izr-b)1xz-b#)p(*2yq1&3e9'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-TEMPLATE_DEBUG = True
+
 
 # =================================\
 # email configuration server
@@ -75,6 +75,7 @@ TEMPLATES = [
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
+            'debug': True,
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
