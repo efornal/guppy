@@ -137,6 +137,7 @@ class Notification(models.Model):
 
     def project_name(obj):
         return "%s" % obj.change.project.name
+    project_name.short_description = _("project_name")
 
     class Meta:
         db_table = 'notifications'
