@@ -130,8 +130,12 @@ class IntegrateInline(admin.TabularInline):
    extra = 3
 
 
-   
+
 class IntegrationAdmin(admin.ModelAdmin):
+    list_display = ('name', 'updated_at', 'created_at', 'confirmed_changes')
+    search_fields = ['name']
+    ordering = ('name',)
+
     inlines = [IntegrateInline,]
 
     def get_readonly_fields(self, request, obj=None):
@@ -172,6 +176,7 @@ class ResponsableAdmin(admin.ModelAdmin):
             else:
                 return ('user', 'project', 'attachment', 'validated_structure')
             
+
 
     
 class ChangeAdmin(admin.ModelAdmin):

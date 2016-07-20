@@ -60,6 +60,12 @@ class Integration(models.Model):
     def __unicode__(self):
         return "%s" % (self.name)
 
+    def confirmed_changes(self):
+        n = Notification.objects.filter(change__project__integrate__integration_id=self.id) \
+                                .filter(change_confirmed=False)
+        return ( len(n) == 0 )
+    confirmed_changes.boolean = True
+    confirmed_changes.short_description = _("confirmed_changes")
     
 class Change(models.Model):
     id = models.AutoField( primary_key=True,null=False)
@@ -86,7 +92,7 @@ class Change(models.Model):
         n = Notification.objects.filter(change=self.id).filter(change_confirmed=False)
         return ( len(n) == 0 )
     confirmed_changes.boolean = True
-    
+    confirmed_changes.short_description = _("confirmed_changes")    
     
 def responsable_attachment_path(instance, filename):
     return 'responsable_{0}/{1}'.format(instance.id, filename.encode("utf8","ignore"))
