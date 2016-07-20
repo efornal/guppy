@@ -89,7 +89,7 @@ class Change(models.Model):
     
     
 def responsable_attachment_path(instance, filename):
-    return 'responsable_{0}/{1}'.format(instance.id, filename)
+    return 'responsable_{0}/{1}'.format(instance.id, filename.encode("utf8","ignore"))
 
 class Responsable(models.Model):
     validated_structure = models.BooleanField(default=False,
