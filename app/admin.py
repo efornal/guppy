@@ -98,7 +98,9 @@ class NotificationAdmin(admin.ModelAdmin):
     def get_readonly_fields(self, request, obj=None):
         if request.user.is_superuser:
             return super(NotificationAdmin, self).get_readonly_fields(request, obj)
-        else:
+        else:         
+            if obj is None:
+                return self.readonly_fields
             if obj.user.pk == request.user.pk:
                 if obj.change_confirmed:
                     return ('user', 'change', 'change_confirmed')
@@ -119,6 +121,8 @@ class ProjectAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return super(ProjectAdmin, self).get_readonly_fields(request, obj)
         else:
+            if obj is None:
+                return self.readonly_fields
             if obj.has_as_responsible(request.user.pk):
                 return ('name', 'integrations_name',)
             else:
@@ -168,6 +172,8 @@ class ResponsableAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return super(ResponsableAdmin, self).get_readonly_fields(request, obj)
         else:
+            if obj is None:
+                return self.readonly_fields
             if obj.user.pk == request.user.pk:
                 if obj.validated_structure:
                     return ('user', 'project', 'attachment', 'validated_structure')

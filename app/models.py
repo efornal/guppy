@@ -33,7 +33,9 @@ class Project(models.Model):
     integrations_name.short_description = _("integrations_name")
 
     def has_as_responsible(self,user_id):
-        projects = Project.objects.filter(responsable__user_id=user_id).filter(pk=self.pk)
+        projects = []
+        if int(user_id) > 0:
+            projects = Project.objects.filter(responsable__user_id=user_id).filter(pk=self.pk)
         if len(projects) > 0:
             return True
         return False
