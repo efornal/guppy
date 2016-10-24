@@ -80,7 +80,7 @@ class NotificationListFilter(admin.SimpleListFilter):
 
 class NotificationAdmin(admin.ModelAdmin):
     list_display = ('change', 'user', 'project_name',
-                    'updated_at', 'created_at', 'change_confirmed')
+                    'updated_at', 'created_at', 'change_confirmed','disagreement')
     search_fields = ['change']
     ordering = ('user',)
     list_filter = (NotificationListFilter, )
@@ -105,11 +105,11 @@ class NotificationAdmin(admin.ModelAdmin):
                 return self.readonly_fields
             if obj.user.pk == request.user.pk:
                 if obj.change_confirmed:
-                    return ('user', 'change', 'change_confirmed')
+                    return ('user', 'change', 'change_confirmed','disagreement')
                 else:
                     return ('user', 'change')
             else:
-                return ('user', 'change', 'change_confirmed')
+                return ('user', 'change', 'change_confirmed','disagreement')
                 
 
         

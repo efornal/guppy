@@ -126,6 +126,8 @@ class Responsable(models.Model):
 class Notification(models.Model):
     change_confirmed = models.BooleanField(default=False,
                                           verbose_name=_('change_confirmed'))
+    disagreement = models.BooleanField(default=False,
+                                          verbose_name=_('disagreement'))
     created_at = models.DateTimeField( auto_now_add=True,
                                        verbose_name=_('created_at'))
     updated_at = models.DateTimeField( auto_now=True,
