@@ -85,6 +85,7 @@ class NotificationAdmin(admin.ModelAdmin):
     ordering = ('user',)
     list_filter = (NotificationListFilter, )
 
+    
     def save_model(self, request, obj, form, change):
         try:
             if not (request.user == obj.user) and (not request.user.is_superuser):
@@ -95,6 +96,7 @@ class NotificationAdmin(admin.ModelAdmin):
             messages.set_level(request, messages.ERROR)
             messages.error(request,"%s" % e[0])
 
+            
     def get_readonly_fields(self, request, obj=None):
         if request.user.is_superuser:
             return super(NotificationAdmin, self).get_readonly_fields(request, obj)
@@ -110,7 +112,6 @@ class NotificationAdmin(admin.ModelAdmin):
                 return ('user', 'change', 'change_confirmed')
                 
 
-
         
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'integrations_name', 'updated_at', 'created_at',)
@@ -123,10 +124,12 @@ class ProjectAdmin(admin.ModelAdmin):
         else:
             if obj is None:
                 return self.readonly_fields
-            if obj.has_as_responsible(request.user.pk):
-                return ('name', 'integrations_name',)
             else:
-                return ('name', 'description', 'integrations_name',)
+                if obj.has_as_responsible(request.user.pk):
+                    return self.readonly_fields
+                else:
+                    return ('name', 'description', 'integrations_name',)
+
 
     
 class IntegrateInline(admin.TabularInline):
@@ -141,12 +144,6 @@ class IntegrationAdmin(admin.ModelAdmin):
     ordering = ('name',)
 
     inlines = [IntegrateInline,]
-
-    def get_readonly_fields(self, request, obj=None):
-        if request.user.is_superuser:
-            return super(IntegrationAdmin, self).get_readonly_fields(request, obj)
-        else:
-            return ('name', 'description', 'projects')
 
 
     
@@ -182,7 +179,6 @@ class ResponsableAdmin(admin.ModelAdmin):
             else:
                 return ('user', 'project', 'attachment', 'validated_structure')
             
-
 
     
 class ChangeAdmin(admin.ModelAdmin):

@@ -88,7 +88,9 @@
   <div class="control-group form-row field-name ">
     <div>
       <div class="control-label">
-        <label>{{ notification.user.username }}  ({{ notification.project_name }}) </label>
+        <label title="{{ notification.project_name }}, {{ notification.created_at }}: {{ notification.change.name }} ">
+          {{ notification.user.username }}
+        </label>
       </div>
       <div class="controls">
         <span class="readonly">
