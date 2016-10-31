@@ -191,11 +191,14 @@ class ChangeAdmin(admin.ModelAdmin):
     }
  
     def get_readonly_fields(self, request, obj=None):
-        if obj is None:
-            return self.readonly_fields
-        else:
-            return [field.name for field in Change._meta.fields if field.name != "id"]
-        endif
+        if request.user.is_superuser:
+            return super(ChangeAdmin, self).get_readonly_fields(request, obj)
+        else:         
+            if obj is None:
+                return self.readonly_fields
+            else:
+                return [field.name for field in Change._meta.fields if field.name != "id"]
+            endif
     
     def change_view(self, request, object_id, form_url='', extra_context=None):
         change_notifications = Notification.objects.filter(change=object_id)
