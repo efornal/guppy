@@ -32,6 +32,14 @@ class Project(models.Model):
         return ', '.join(names)
     integrations_name.short_description = _("integrations_name")
 
+    def responsable_users(obj):
+        responsables = Responsable.objects.filter(project__id=obj.pk)
+        names = []
+        for r in responsables:
+            names.append(unicode(r.user.username))
+        return ', '.join(names)
+    responsable_users.short_description = _("responsable_users")
+
     def has_as_responsible(self,user_id):
         projects = []
         if int(user_id) > 0:
