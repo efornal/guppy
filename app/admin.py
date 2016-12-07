@@ -302,13 +302,21 @@ class ChangeAdmin(admin.ModelAdmin):
             endif
     
     def change_view(self, request, object_id, form_url='', extra_context=None):
-        change_notifications = Notification.objects.filter(change=object_id)
+        change_notifications = Notification.objects.filter(change__id=object_id)
         context = {'notifications': change_notifications,}
         return super(ChangeAdmin, self).change_view(request, object_id,'',context)
+
     
     def save_model(self, request, obj, form, change):
-            
+
+        if obj.pk:
+            obj.save()
+            logging.warning('Modifying the change, notifications are omitted...')
+            return
+
         obj.save()
+
+        logging.warning('A new change was created, notifications will be sent.')
         integrations = Integration.objects.filter(integrate__project_id=obj.project.pk)
         
         responsible_users=[]
@@ -341,7 +349,9 @@ class ChangeAdmin(admin.ModelAdmin):
                                message_from,
                                ["%s" % u.email])
                 messages_to_responsible += (message_to,)
-               
+            
+
+
         try:
             sent_messages = send_mass_mail(messages_to_responsible, fail_silently=False)
             messages.info(request,_('message_mails_sent') % {'emails':sent_messages} )
