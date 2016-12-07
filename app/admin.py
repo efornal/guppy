@@ -22,35 +22,81 @@ from django.db import models
 
 es_formats.DATETIME_FORMAT = "d-m-Y H:i"
 
-
-class ResponsableListFilter(admin.SimpleListFilter):
-    title = _('user')
-    parameter_name = 'user'
+class ResponsableProjectListFilter(admin.SimpleListFilter):
+    title = _('responsable')
+    parameter_name = 'name'
     default_value = None
     
     def lookups(self, request, model_admin):
-        if not request.user.is_superuser:
-            self.default_value = request.user.id
-        list_of_users = []
-        queryset = User.objects.all()
-        for user in queryset:
-            list_of_users.append(
-                (str(user.id), user.username)
+        list_of_projects = []
+        queryset = Project.objects.all()
+        for project in queryset:
+            list_of_projects.append(
+                (str(project.id), project.name)
             )
-        return sorted(list_of_users, key=lambda tp: tp[1])
+        return sorted(list_of_projects, key=lambda tp: tp[1])
     
     def queryset(self, request, queryset):
         if self.value():
-            return queryset.filter(user_id=self.value())
+            return queryset.filter(project__id=self.value())
 
     def value(self):
-        value = super(ResponsableListFilter, self).value()
+        value = super(ResponsableProjectListFilter, self).value()
+        if value is None:
+            value = self.default_value
+        return value
+
+# class ResponsableProjectListFilter(admin.SimpleListFilter):
+#     title = _('responsable')
+#     parameter_name = 'name'
+#     default_value = None
+    
+#     def lookups(self, request, model_admin):
+#         list_of_users = []
+#         queryset = User.objects.all()
+#         for user in queryset:
+#             list_of_users.append(
+#                 (str(user.id), user.username)
+#             )
+#         return sorted(list_of_users, key=lambda tp: tp[1])
+    
+#     def queryset(self, request, queryset):
+#         if self.value():
+#             return queryset.filter(responsable__user_id=self.value())
+
+#     def value(self):
+#         value = super(ResponsableProjectListFilter, self).value()
+#         if value is None:
+#             value = self.default_value
+#         return value
+
+
+class PeojectIntegrationListFilter(admin.SimpleListFilter):
+    title = _('integration')
+    parameter_name = 'name'
+    default_value = None
+    
+    def lookups(self, request, model_admin):
+        list_of_integrations = []
+        queryset = Integration.objects.all()
+        for integ in queryset:
+            list_of_integrations.append(
+                (str(integ.id), integ.name)
+            )
+        return sorted(list_of_integrations, key=lambda tp: tp[1])
+    
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(integrate__integration__id=self.value())
+
+    def value(self):
+        value = super(PeojectIntegrationListFilter, self).value()
         if value is None:
             value = self.default_value
         return value
 
     
-class NotificationListFilter(admin.SimpleListFilter):
+class ProjectResponsableListFilter(admin.SimpleListFilter):
     title = _('user')
     parameter_name = 'user'
     default_value = None
@@ -68,10 +114,61 @@ class NotificationListFilter(admin.SimpleListFilter):
     
     def queryset(self, request, queryset):
         if self.value():
+            return queryset.filter(responsable__user_id=self.value())
+
+    def value(self):
+        value = super(ProjectResponsableListFilter, self).value()
+        if value is None:
+            value = self.default_value
+        return value
+
+    
+class NotificationUserListFilter(admin.SimpleListFilter):
+    title = _('user')
+    parameter_name = 'user'
+    default_value = None
+    
+    def lookups(self, request, model_admin):
+        list_of_users = []
+        queryset = User.objects.all()
+        for user in queryset:
+            list_of_users.append(
+                (str(user.id), user.username)
+            )
+        return sorted(list_of_users, key=lambda tp: tp[1])
+    
+    def queryset(self, request, queryset):
+        if self.value():
             return queryset.filter(user_id=self.value())
 
     def value(self):
-        value = super(NotificationListFilter, self).value()
+        value = super(NotificationUserListFilter, self).value()
+        if value is None:
+            value = self.default_value
+        return value
+ 
+
+    
+class NotificationProjectListFilter(admin.SimpleListFilter):
+    title = _('project')
+    parameter_name = 'name'
+    default_value = None
+    
+    def lookups(self, request, model_admin):
+        list_of_projects = []
+        queryset = Project.objects.all()
+        for project in queryset:
+            list_of_projects.append(
+                (str(project.id), project.name)
+            )
+        return sorted(list_of_projects, key=lambda tp: tp[1])
+    
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(change__project__id=self.value())
+
+    def value(self):
+        value = super(NotificationProjectListFilter, self).value()
         if value is None:
             value = self.default_value
         return value
@@ -83,7 +180,7 @@ class NotificationAdmin(admin.ModelAdmin):
                     'updated_at', 'created_at', 'change_confirmed','disagreement')
     search_fields = ['change']
     ordering = ('user',)
-    list_filter = (NotificationListFilter, )
+    list_filter = ( NotificationProjectListFilter,NotificationUserListFilter)
 
     
     def save_model(self, request, obj, form, change):
@@ -117,6 +214,7 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'integrations_name', 'responsable_users', \
                     'updated_at', 'created_at',)
     search_fields = ['name']
+    list_filter = (PeojectIntegrationListFilter, ProjectResponsableListFilter)
     ordering = ('name',)
 
     def get_readonly_fields(self, request, obj=None):
@@ -153,7 +251,8 @@ class ResponsableAdmin(admin.ModelAdmin):
                     'updated_at', 'created_at', 'validated_structure')
     search_fields = ['project']
     ordering = ('project',)
-    list_filter = (ResponsableListFilter, )
+    list_filter = (ResponsableProjectListFilter, )
+
 
         
     def save_model(self, request, obj, form, change):
@@ -185,6 +284,7 @@ class ResponsableAdmin(admin.ModelAdmin):
 class ChangeAdmin(admin.ModelAdmin):
     list_display = ('name', 'project', 'updated_at', 'created_at', 'confirmed_changes')
     search_fields = ['name']
+    list_filter = ('project', )
     ordering = ('project',)
     formfield_overrides = {
         models.TextField: {'widget': Textarea(

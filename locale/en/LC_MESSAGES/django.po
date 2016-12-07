@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-06 12:27-0300\n"
+"POT-Creation-Date: 2016-12-06 12:56-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,35 +21,39 @@ msgstr ""
 msgid "user"
 msgstr "User"
 
-#: app/admin.py:92 app/admin.py:162
+#: app/admin.py:82 app/models.py:91 app/models.py:118 app/models.py:165
+msgid "project"
+msgstr "Project"
+
+#: app/admin.py:120 app/admin.py:190
 msgid "user_without_permissions"
 msgstr "User %(user)s does not have permission to perform this action"
 
-#: app/admin.py:223 app/admin.py:225
+#: app/admin.py:252 app/admin.py:254
 msgid "message_updated_project"
 msgstr "Updated project"
 
-#: app/admin.py:226
+#: app/admin.py:255
 msgid "message_change"
 msgstr "Change"
 
-#: app/admin.py:227
+#: app/admin.py:256
 msgid "message_description"
 msgstr "Description"
 
-#: app/admin.py:228
+#: app/admin.py:257
 msgid "message_created_at"
 msgstr "Created at"
 
-#: app/admin.py:230
+#: app/admin.py:259
 msgid "message_updated_at"
 msgstr "Updated at"
 
-#: app/admin.py:232
+#: app/admin.py:261
 msgid "message_confirm_change"
 msgstr "Confirms change"
 
-#: app/admin.py:247
+#: app/admin.py:276
 msgid "message_mails_sent"
 msgstr "Message mails sent"
 
@@ -102,10 +106,6 @@ msgstr "Integrations"
 #: app/models.py:78 app/models.py:105
 msgid "confirmed_changes"
 msgstr "Confirmed changes"
-
-#: app/models.py:91 app/models.py:118 app/models.py:165
-msgid "project"
-msgstr "Project"
 
 #: app/models.py:95
 msgid "Change"
