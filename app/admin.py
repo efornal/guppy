@@ -23,18 +23,18 @@ from django.db import models
 es_formats.DATETIME_FORMAT = "d-m-Y H:i"
 
 class ResponsableProjectListFilter(admin.SimpleListFilter):
-    title = _('responsable')
+    title = _('project')
     parameter_name = 'name'
     default_value = None
     
     def lookups(self, request, model_admin):
-        list_of_users = []
-        queryset = User.objects.all()
-        for user in queryset:
-            list_of_users.append(
-                (str(user.id), user.username)
+        list_of_projects = []
+        queryset = Project.objects.all()
+        for project in queryset:
+            list_of_projects.append(
+                (str(project.id), project.name)
             )
-        return sorted(list_of_users, key=lambda tp: tp[1])
+        return sorted(list_of_projects, key=lambda tp: tp[1])
     
     def queryset(self, request, queryset):
         if self.value():
