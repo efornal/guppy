@@ -28,13 +28,13 @@ class ResponsableProjectListFilter(admin.SimpleListFilter):
     default_value = None
     
     def lookups(self, request, model_admin):
-        list_of_projects = []
-        queryset = Project.objects.all()
-        for project in queryset:
-            list_of_projects.append(
-                (str(project.id), project.name)
+        list_of_users = []
+        queryset = User.objects.all()
+        for user in queryset:
+            list_of_users.append(
+                (str(user.id), user.username)
             )
-        return sorted(list_of_projects, key=lambda tp: tp[1])
+        return sorted(list_of_users, key=lambda tp: tp[1])
     
     def queryset(self, request, queryset):
         if self.value():
