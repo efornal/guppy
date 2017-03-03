@@ -96,11 +96,19 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'guppy_db',
+        'USER': 'guppy_user',
+        'PASSWORD': 'user',
+        'PORT': '5432',
+        'HOST': 'localhost',
+    },
+        'guppy_owner': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'guppy_db',
         'USER': 'guppy_owner',
         'PASSWORD': 'owner',
         'PORT': '5432',
         'HOST': 'localhost',
-    }
+    },
 }
 
 LOCALE_PATHS = (
