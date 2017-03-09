@@ -156,7 +156,7 @@ class NotificationProjectListFilter(admin.SimpleListFilter):
     
     def lookups(self, request, model_admin):
         list_of_projects = []
-        queryset = Project.objects.all()
+        queryset = Project.objects.filter(change__notification__user_id=1).distinct()
         for project in queryset:
             list_of_projects.append(
                 (str(project.id), project.name)
