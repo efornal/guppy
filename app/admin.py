@@ -100,7 +100,8 @@ class ProjectResponsableListFilter(admin.SimpleListFilter):
     title = _('user')
     parameter_name = 'user'
     default_value = None
-    
+
+
     def lookups(self, request, model_admin):
         if not request.user.is_superuser:
             self.default_value = request.user.id
@@ -127,10 +128,24 @@ class NotificationUserListFilter(admin.SimpleListFilter):
     title = _('user')
     parameter_name = 'user'
     default_value = None
-    
+
+    def __init__(self, request, params, model, model_admin):
+        if 'user' not in params: # set default user
+            params={'user':'{}'.format(request.user.pk)}
+        super(NotificationUserListFilter, self).__init__(
+            request, params, model, model_admin)
+        
     def lookups(self, request, model_admin):
+        notified_projects = Project.objects.filter(responsable__user_id=request.user.pk) \
+                                           .distinct()
+        projects_users=[]
+        for p in notified_projects:
+            projects_users.append(p.pk)
+
         list_of_users = []
-        queryset = User.objects.all()
+        queryset = User.objects.filter(responsable__project_id__in=projects_users)
+
+       
         for user in queryset:
             list_of_users.append(
                 (str(user.id), user.username)
@@ -140,7 +155,7 @@ class NotificationUserListFilter(admin.SimpleListFilter):
     def queryset(self, request, queryset):
         if self.value():
             return queryset.filter(user_id=self.value())
-
+        
     def value(self):
         value = super(NotificationUserListFilter, self).value()
         if value is None:
@@ -156,7 +171,8 @@ class NotificationProjectListFilter(admin.SimpleListFilter):
     
     def lookups(self, request, model_admin):
         list_of_projects = []
-        queryset = Project.objects.filter(change__notification__user_id=1).distinct()
+        queryset = Project.objects.filter(responsable__user_id=request.user.pk) \
+                                  .distinct()
         for project in queryset:
             list_of_projects.append(
                 (str(project.id), project.name)
@@ -176,7 +192,7 @@ class NotificationProjectListFilter(admin.SimpleListFilter):
 
 
 class NotificationAdmin(admin.ModelAdmin):
-    list_display = ('change', 'user', 'project_name',
+    list_display = ('change', 'user', 'project_name','change_link',
                     'updated_at', 'created_at', 'change_confirmed','disagreement')
     search_fields = ['change']
     ordering = ('user',)
@@ -202,11 +218,11 @@ class NotificationAdmin(admin.ModelAdmin):
                 return self.readonly_fields
             if obj.user.pk == request.user.pk:
                 if obj.change_confirmed:
-                    return ('user', 'change', 'change_confirmed','disagreement')
+                    return ('user', 'change_link', 'change_confirmed','disagreement')
                 else:
-                    return ('user', 'change')
+                    return ('user', 'change_link')
             else:
-                return ('user', 'change', 'change_confirmed','disagreement')
+                return ('user', 'change_link', 'change_confirmed','disagreement')
                 
 
         

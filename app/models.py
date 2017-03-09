@@ -2,6 +2,8 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
+from django.utils.html import format_html
+from django.core.urlresolvers import reverse
 import logging
 
 
@@ -131,6 +133,7 @@ class Responsable(models.Model):
         return "%s %s %s" % (self.user.username,_('of'),self.project.name)
 
 
+
 class Notification(models.Model):
     change_confirmed = models.BooleanField(default=False,
                                           verbose_name=_('change_confirmed'))
@@ -150,6 +153,13 @@ class Notification(models.Model):
     def project_name(obj):
         return "%s" % obj.change.project.name
     project_name.short_description = _("project_name")
+
+    def change_link(obj):
+        return format_html("<a href='{}'>{}</a>" \
+                           .format(reverse('admin:app_change_change', \
+                                           args=[obj.change.pk]),obj.change))
+        
+    change_link.short_description = _("change")
 
     class Meta:
         db_table = 'notifications'
