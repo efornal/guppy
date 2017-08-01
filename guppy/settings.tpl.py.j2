@@ -16,7 +16,9 @@ import ldap
 from django.utils.translation import ugettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE_URL = 'http://domain.com/guppy'
+BASE_URL = "{{ app_base_url }}{{ app_url }}"
+APPLICATION_NAME= "{{ app_title|capitalize }}"
+APPLICATION_DESC= "{{ app_desc|capitalize }}"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -25,20 +27,20 @@ BASE_URL = 'http://domain.com/guppy'
 SECRET_KEY = '@wbz9(i^_7t+td&ho&cy5hs6k!izr-b)1xz-b#)p(*2yq1&3e9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = {{ app_debug }}
 
 ALLOWED_HOSTS = ['*']
 
 
 # =================================\
 # email configuration server
-EMAIL_HOST='smtp.server'
-EMAIL_PORT=25
+EMAIL_HOST = "{{ email_host }}"
+EMAIL_PORT = {{ email_port }}
 #EMAIL_HOST_PASSWORD=''
 #EMAIL_HOST_USER=''
 
 # email configuration application
-EMAIL_FROM = 'noreply@domain.com'
+EMAIL_FROM = "{{ email_from }}"
 # =================================/
 
 # Application definition
@@ -76,7 +78,7 @@ TEMPLATES = [
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
-            'debug': True,
+            'debug': {{ app_debug }},
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -96,19 +98,19 @@ WSGI_APPLICATION = 'guppy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'guppy_db',
-        'USER': 'guppy_user',
-        'PASSWORD': 'user',
-        'PORT': '5432',
-        'HOST': 'localhost',
+        'NAME': '{{ db_name }}',
+        'USER': '{{ db_user }}',
+        'PASSWORD': '{{ db_pass }}',
+        'PORT': '{{ db_port }}',
+        'HOST': '{{ db_host }}',
     },
-        'guppy_owner': {
+    '{{ db_user_owner }}': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'guppy_db',
-        'USER': 'guppy_owner',
-        'PASSWORD': 'owner',
-        'PORT': '5432',
-        'HOST': 'localhost',
+        'NAME': '{{ db_name }}',
+        'USER': '{{ db_user_owner }}',
+        'PASSWORD': '{{ db_pass_owner }}',
+        'PORT': '{{ db_port }}',
+        'HOST': '{{ db_host }}',
     },
 }
 
@@ -117,13 +119,13 @@ LOCALE_PATHS = (
 
 # =================================\
 # ldap configuration
-LDAP_SERVER = 'ldap://host_ldap:port'
-
-LDAP_DN = 'dc=domain,dc=edu,dc=ar'
+LDAP_SERVER = "{{ ldap_server }}"
+LDAP_DN = "{{ ldap_dn }}"
 
 # Organizational Unit for Person
-LDAP_PEOPLE = 'People'
-LDAP_GROUP  = 'Group' # ou=Entry
+LDAP_PEOPLE = "{{ ldap_people }}"
+LDAP_GROUP  = "{{ ldap_group }}"
+
 # =================================/
     
 # Internationalization
@@ -147,13 +149,17 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-#STATIC_ROOT = '/srv/guppy/shared/static'
-STATIC_URL = '/static/'
-LOGIN_URL='/app/login/'
+{% if app_static_root %}
+STATIC_ROOT = "{{ app_static_root }}"
+{% endif %}
+STATIC_URL="{{ app_static_url }}"
+
+LOGIN_URL = "{{ app_login_url }}"
+LOGIN_REDIRECT_URL = "{{ app_login_redirect_url }}"
 
 # media files
-MEDIA_ROOT = '/srv/guppy/shared/media'
-MEDIA_URL = '/test/guppy/media/'
+MEDIA_ROOT = "{{ app_media_root }}"
+MEDIA_URL  = "{{ app_media_url }}"
 
 
 # =================================\
@@ -208,7 +214,7 @@ AUTHENTICATION_BACKENDS = (
 
 # django configuration
 SUIT_CONFIG = {
-    'ADMIN_NAME': 'Guppy'
+    'ADMIN_NAME': APPLICATION_NAME
 }
 
 
