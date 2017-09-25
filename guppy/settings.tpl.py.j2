@@ -159,9 +159,10 @@ LOGIN_URL = "{{ app_login_url }}"
 LOGIN_REDIRECT_URL = "{{ app_login_redirect_url }}"
 
 # media files
+{% if app_media_root %}
 MEDIA_ROOT = "{{ app_media_root }}"
 MEDIA_URL  = "{{ app_media_url }}"
-
+{% endif %}
 
 # =================================\
 # django ldap configuration
